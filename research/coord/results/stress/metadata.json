@@ -1,0 +1,12 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.22621-SP0",
+  "numpy": "2.3.5",
+  "simulation_dt_s": 0.5,
+  "asas_dt_s": 1.0,
+  "lookahead_s": 180.0,
+  "suite": "stress",
+  "duration_s": 600.0,
+  "separation_nm": 5.0,
+  "note": "Synthetic, level, no-wind A320 scenarios. Not operational validation."
+}

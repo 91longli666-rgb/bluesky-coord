@@ -1,0 +1,35 @@
+{
+  "COORD": {
+    "runs": 16,
+    "clearances": 102,
+    "los_events": 0,
+    "extra_distance_nm": 34.01102547614244,
+    "minimum_distance_nm": 5.496549443223999,
+    "reversals": 83,
+    "fallback_updates": 25,
+    "timeout_updates": 0,
+    "max_resolution_ms": 488.7759000012011
+  },
+  "MVP": {
+    "runs": 16,
+    "clearances": 758,
+    "los_events": 0,
+    "extra_distance_nm": 117.88341415298639,
+    "minimum_distance_nm": 5.190541247148104,
+    "reversals": 520,
+    "fallback_updates": 0,
+    "timeout_updates": 0,
+    "max_resolution_ms": 0.9821000021474902
+  },
+  "MVP_TAS": {
+    "runs": 16,
+    "clearances": 1025,
+    "los_events": 0,
+    "extra_distance_nm": 110.44838508699671,
+    "minimum_distance_nm": 5.0739139070252985,
+    "reversals": 947,
+    "fallback_updates": 0,
+    "timeout_updates": 0,
+    "max_resolution_ms": 1.4568000005965587
+  }
+}

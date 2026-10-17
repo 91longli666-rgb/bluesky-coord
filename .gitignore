@@ -94,3 +94,8 @@ ssd.obj
 *-checkpoint.py
 *-checkpoint.ipynb
 .ropeproject/config.py
+
+# COORD local environments and research scratch files
+/.venv/
+/.pytest_cache/
+/work/

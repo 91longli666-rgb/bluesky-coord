@@ -1,54 +1,60 @@
-# BlueSky - The Open Air Traffic Simulator
+# BlueSky COORD — 空中交通管制定向优化第一版
 
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/TUDelft-CNS-ATM/bluesky)
-[![GitHub release](https://img.shields.io/github/release/TUDelft-CNS-ATM/bluesky.svg)](https://GitHub.com/TUDelft-CNS-ATM/bluesky/releases/)
-![GitHub all releases](https://img.shields.io/github/downloads/TUDelft-CNS-ATM/bluesky/total?style=social)
-[![Discord](https://img.shields.io/discord/1359446056877690970?style=flat&logo=discord&logoColor=green&logoSize=auto&label=BlueSky%20discussion)](https://discord.gg/wkBKgXCHYN)
+**v0.1.0 · 由 [91longli666-rgb](https://github.com/91longli666-rgb) 维护的非官方研究优化分支。**
 
+本项目基于 TU Delft 的 [BlueSky Open Air Traffic Simulator](https://github.com/TUDelft-CNS-ATM/bluesky)，新增 **COORD 多航空器协同冲突解脱插件**，研究如何在满足设定间隔约束的同时减少重复管制指令和绕飞。
 
-[![PyPI version shields.io](https://img.shields.io/pypi/v/bluesky-simulator.svg)](https://pypi.python.org/pypi/bluesky-simulator/)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/bluesky-simulator?style=plastic)
-[![PyPI license](https://img.shields.io/pypi/l/bluesky-simulator?style=plastic)](https://pypi.python.org/pypi/bluesky-simulator/)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/bluesky-simulator?style=plastic)](https://pypi.python.org/pypi/bluesky-simulator/)
+BlueSky 的原始仿真平台与基础算法由上游作者及贡献者开发；本仓库的新增贡献为 COORD 插件、相关测试、对照实验和优化文档。本仓库不是上游官方发布版本。
 
-BlueSky is meant as a tool to perform research on Air Traffic Management and Air Traffic Flows, and is distributed under the MIT license.
+## 原项目与署名
 
-The goal of BlueSky is to provide everybody who wants to visualize, analyze or simulate air
-traffic with a tool to do so without any restrictions, licenses or limitations. It can be copied,
-modified, cited, etc. without any limitations.
+- **上游项目：** [TUDelft-CNS-ATM/bluesky](https://github.com/TUDelft-CNS-ATM/bluesky)
+- **上游主要作者：** Jacco M. Hoekstra、Joost Ellerbroek，以及 BlueSky 的其他贡献者。
+- **上游版权声明：** `Copyright (c) 2025 TU Delft`。
+- **许可证：** 完整保留上游 [MIT LICENSE](LICENSE)；新增内容也按 MIT 发布，见 [LICENSE-COORD](LICENSE-COORD)。已有第三方文件的版权与许可声明保留。
+- **来源：** 上游提交 [`46a2a8a`](https://github.com/TUDelft-CNS-ATM/bluesky/commit/46a2a8a5fa4e0bdd6f6991fefc70dc3512f8fc53)。详见 [NOTICE](NOTICE.md)、[原版 README](README-UPSTREAM.md)、[来源记录](research/coord/UPSTREAM.json)。
 
-**Citation info:** J. M. Hoekstra and J. Ellerbroek, "[BlueSky ATC Simulator Project: an Open Data and Open Source Approach](https://www.researchgate.net/publication/304490055_BlueSky_ATC_Simulator_Project_an_Open_Data_and_Open_Source_Approach)", Proceedings of the seventh International Conference for Research on Air Transport (ICRAT), 2016.
+学术使用时请引用原项目论文：J. M. Hoekstra and J. Ellerbroek, “BlueSky ATC Simulator Project: an Open Data and Open Source Approach,” 7th International Conference for Research in Air Transportation (ICRAT), 2016。[论文信息](https://research.tudelft.nl/en/publications/bluesky-atc-simulator-project-an-open-data-and-open-source-approa/)
 
-## BlueSky Releases
-BlueSky is also available as a pip package, for which periodically version releases are made. You can find the latest release here:
-https://github.com/TUDelft-CNS-ATM/bluesky/releases
-The BlueSky pip package is installed with the following command:
+## 第一版优化
 
-    pip install bluesky-simulator[full]
+1. **多机联合解脱：** 联合选择受威胁飞机的航向与速度，同时校验背景飞机对。
+2. **指令保持与恢复：** 保持已校验指令，恢复航路前重新检查；出现风险时允许立即重规划。
+3. **响应过程预测：** 考虑转弯和加减速，检查预测线段内最近距离及恒定目标速度的终端条件。
+4. **明确回退：** 无可行候选、超时、超限或条件不受支持时回退原版 MVP；失败后间隔 5 秒重试，期间 MVP 继续更新。
+5. **可核查实验：** 提供原版 MVP、仅修正速度裁剪单位的 MVP_TAS 和 COORD 对照，以及轨迹、指标和测试。
 
-Using ZSH? Add quotes around the package name: `"bluesky-simulator[full]"`. For more installation instructions go to the Wiki.
+## 验证结果
 
-## BlueSky Wiki
-Installation and user guides are accessible at:
-https://github.com/TUDelft-CNS-ATM/bluesky/wiki
+以下为 **16 组定高、无风、A320 合成场景**的累计结果，每组每种算法运行 600 秒，不是实际航班数据。
 
-## Some features of BlueSky:
-- Written in the freely available, ultra-simple-hence-easy-to-learn, multi-platform language
-Python 3 (using numpy and either pygame or Qt+OpenGL for visualisation) with source
-- Extensible by means of self-contained [plugins](https://github.com/TUDelft-CNS-ATM/bluesky/wiki/plugin)
-- Contains open source data on navaids, performance data of aircraft and geography
-- Global coverage navaid and airport data
-- Contains simulations of aircraft performance, flight management system (LNAV, VNAV under construction),
-autopilot, conflict detection and resolution and airborne separation assurance systems
-- Compatible with BADA 3.x data
-- Compatible wth NLR Traffic Manager TMX as used by NLR and NASA LaRC
-- Traffic is controlled via user inputs in a console window or by playing scenario files (.SCN)
-containing the same commands with a time stamp before the command ("HH:MM:SS.hh>")
-- Mouse clicks in traffic window are use in console for lat/lon/heading and position inputs
+| 指标 | 原版 MVP | COORD |
+|---|---:|---:|
+| 组合管制指令次数 | 758 | **102** |
+| 间隔违规事件 | 0 | 0 |
+| 额外航程合计（NM，固定时长代理指标） | 117.883 | 34.011 |
+| 回退更新次数 | — | 25 |
 
-## Questions or suggestions?
-Visit us on [Discord](https://discord.gg/wkBKgXCHYN), open a topic on the GitHub discussion board, or open an issue.
+此验证集中指令次数减少 **86.5%**；新增 **28 项自动测试通过**。计数阈值、替代对照与失败记录见[完整实验报告](research/coord/results/优化实验报告.md)，不能将全部收益单独归因于某个算法机制。
 
-## Contributions
-BlueSky can be considered 'perpetual beta'. We would like to encourage anyone with a strong interest in
-ATM and/or Python to join us. Please feel free to comment, criticise, and contribute to this project. Please send suggestions, proposed changes or contributions through GitHub pull requests, preferably after debugging it and optimising it for run-time performance.
+![验证集比较](research/coord/results/validation-comparison.png)
+
+**适用边界：** 局部空域、定高、无风、OpenAP 固定翼，单次最多联合优化 12 架受威胁飞机。16 机超限回退压力测试中，一组出现 3 次间隔违规，该结果完整保留。当前版本为研究原型。
+
+## 运行
+
+建议 Python 3.12。在仓库根目录执行：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-coord.txt
+.\run-coord.ps1 -Action test
+.\run-coord.ps1 -Action demo
+```
+
+在已安装依赖的 BlueSky 界面中输入 `PLUGINS LOAD COORD`、`CDMETHOD STATEBASED`、`RESO COORD`；通过 `COORDSTATUS` 查看状态，`RESO MVP` 切回原方法。
+
+- [完整运行和参数说明](README-COORD.md)
+- [插件](bluesky/plugins/coord.py)与[独立规划器](bluesky/plugins/coord_core.py)
+- [测试](tests/coord)、[实验与数据](research/coord)、[演示场景](scenario/COORD)
+- [第一版改动](CHANGELOG.md)、[上游说明](README-UPSTREAM.md)、[署名与许可](NOTICE.md)

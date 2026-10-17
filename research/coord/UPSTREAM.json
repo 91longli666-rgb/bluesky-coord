@@ -1,0 +1,33 @@
+{
+  "repository": "https://github.com/TUDelft-CNS-ATM/bluesky",
+  "commit": "46a2a8a5fa4e0bdd6f6991fefc70dc3512f8fc53",
+  "retrieved_date": "2026-10-16",
+  "archive_sha256": "ac1dd89e8d947593ae2d5c8841e7222bb8e06aaa1025523274491d9eaafc4e29",
+  "upstream_files_verified_against_git_blobs": 1094,
+  "modified_upstream_files": [
+    ".github/workflows/build-wheels.yml",
+    ".gitignore",
+    "README.md"
+  ],
+  "license": "MIT; upstream LICENSE retained without changes",
+  "derivative_repository": "https://github.com/91longli666-rgb/bluesky-coord",
+  "derivative_version": "v0.1.0",
+  "publication_prepared_date": "2026-10-17",
+  "dependencies_tested": {
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "openap": "2.6.2",
+    "bluesky-navdata": "1.0.0",
+    "pytest": "9.1.1",
+    "matplotlib": "3.11.2",
+    "pandas": "3.0.1",
+    "msgpack": "1.2.3",
+    "pyzmq": "27.2.0"
+  },
+  "optimization_sha256": {
+    "bluesky/plugins/coord.py": "5c46977bf54e640188d328cc14b844cd304d2b3cac0bfa3799ffa9e163f288dc",
+    "bluesky/plugins/coord_core.py": "3bb2e19f6f4fa603f66e945ad0a8c5868a6241b02b6c80e2c15004f06c1fd9ec",
+    "research/coord/benchmark.py": "c321017ba58f64511b12a2d3105107ef5485b30b1712ca3d8f7cd98204c37912",
+    "research/coord/reference.py": "20d522d1417f328fde01dbaaf79b352629a121f0004d67d8332e819e1c8ae313"
+  }
+}

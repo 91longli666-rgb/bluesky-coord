@@ -1,0 +1,10 @@
+# Tested with Python 3.12.14. Core/headless research environment; no Qt needed.
+numpy==2.3.5
+scipy==1.18.1
+matplotlib==3.11.2
+pandas==3.0.1
+msgpack==1.2.3
+pyzmq==27.2.0
+bluesky-navdata==1.0.0
+openap==2.6.2
+pytest==9.1.1

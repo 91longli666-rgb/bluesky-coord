@@ -1,0 +1,20 @@
+............................                                             [100%]
+============================== warnings summary ===============================
+tests/coord/test_integration.py::test_select_after_creation_delete_recreate_and_reset
+tests/coord/test_integration.py::test_select_after_creation_delete_recreate_and_reset
+tests/coord/test_integration.py::test_unsupported_vertical_state_reports_fallback
+tests/coord/test_integration.py::test_configuration_validation_is_atomic
+tests/coord/test_integration.py::test_can_switch_back_to_original_mvp
+tests/coord/test_integration.py::test_fallback_does_not_leave_coordinator_activation_latched
+tests/coord/test_integration.py::test_generated_scenario_loads_in_actual_headless_simulator
+tests/coord/test_integration.py::test_generated_scenario_loads_in_actual_headless_simulator
+tests/coord/test_integration.py::test_failed_solver_is_throttled_while_resolution_keeps_updating
+  <repository>\bluesky\simulation\simulation.py:209: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.utc = datetime.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+
+tests/coord/test_integration.py: 130 warnings
+  <python-runtime>\Lib\site-packages\numpy\matrixlib\defmatrix.py:70: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
+    return matrix(data, dtype=dtype, copy=False)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+28 passed, 139 warnings in 9.38s
